@@ -62,10 +62,12 @@ if __name__ == "__main__":
     if os.path.exists('cifar-10.sframe') is False:
         create_new_data()
     sf = tc.load_sframe('cifar-10.sframe')
-    sf.explore()
     model = tc.image_classifier.create(sf, target='label')
-    test_sf = create_test_data()
-    result = model.evaluate(test_sf)
-    print(result['accuracy'])
     model.save('cifar-10_model')
     model.export_coreml('cifar-10.mlmodel')
+    # 测试准确率
+    # model = tc.load_model('cifar-10_model')
+    # test_sf = create_test_data()
+    # predictions = model.predict(test_sf)
+    # result = model.evaluate(test_sf)
+    # print(result['accuracy'])
